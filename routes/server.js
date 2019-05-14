@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('already connect to server');
+  res.render('index', { title: 'Already Connect To Server' });
 });
 
 module.exports = router;

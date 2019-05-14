@@ -13,11 +13,11 @@ const todoRouter    = require('./routes/todo')
 const userRouter    = require('./routes/user')
 const weatherRouter = require('./routes/weather')
 
-const app           = express();
+const app = express();
 
 //mongoose connection
 const mongoose = require('mongoose')
-const dbUrl    = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds247670.mlab.com:47670/todo`;
+const dbUrl = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds247670.mlab.com:47670/todo`;
 mongoose.connect(dbUrl, {
     useNewUrlParser: true
 }, (err) => {
