@@ -7,6 +7,7 @@ const logger       = require('morgan');
 const cors         = require('cors')
 const jwt          = require('jsonwebtoken')
 
+const indexServer   = require('./routes/server')
 const indexRouter   = require('./routes/index')
 const todoRouter    = require('./routes/todo')
 const userRouter    = require('./routes/user')
@@ -40,6 +41,7 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexServer)
 app.use('/index', indexRouter)
 app.use('/todo', todoRouter)
 app.use('/user', userRouter)
