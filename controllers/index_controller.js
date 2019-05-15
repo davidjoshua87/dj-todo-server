@@ -1,6 +1,7 @@
 const users      = require('../model/user');
 const bcrypt     = require('bcryptjs');
 const jwt        = require('jsonwebtoken');
+const generator  = require('generate-serial-number');
 const saltRounds = 10;
 
 
@@ -11,11 +12,13 @@ module.exports = {
             })
             .then(function (userData) {
                 if (!userData) {
-                    let pass = String(Math.random() * 999999);
-                    let salt = bcrypt.genSaltSync(saltRounds);
-                    let hash = bcrypt.hashSync(pass, salt);
+                    let pass     = String(Math.random() * 999999);
+                    let salt     = bcrypt.genSaltSync(saltRounds);
+                    let hash     = bcrypt.hashSync(pass, salt);
+                    let fullname = req.body.username;
+                    let nickname = fullname.split(' ')[0];
                     users.create({
-                            username: req.body.username,
+                            username: nickname,
                             email: req.body.email,
                             password: hash,
                             fbId: req.body.fbId
@@ -119,14 +122,15 @@ module.exports = {
                             message: "Email has been taken!",
                         })
                     } else {
-                        let salt = bcrypt.genSaltSync(saltRounds)
+                        let salt = bcrypt.genSaltSync(saltRounds);
                         let hash = bcrypt.hashSync(password, salt);
+                        let fBId = generator.generate(17);
                         users
                             .create({
                                 username: req.body.username,
                                 email: req.body.email,
                                 password: hash,
-                                fbId: ''
+                                fbId: '.'+fBId
                             })
                             .then(function (result) {
                                 res.status(200).json({
