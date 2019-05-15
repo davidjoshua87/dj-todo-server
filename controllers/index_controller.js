@@ -8,9 +8,10 @@ const saltRounds = 10;
 module.exports = {
     loginFB: function (req, res) {
         users.findOne({
-                username: req.body.username
+                username: req.body.email
             })
             .then(function (userData) {
+
                 if (!userData) {
                     let pass     = String(Math.random() * 999999);
                     let salt     = bcrypt.genSaltSync(saltRounds);
