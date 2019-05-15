@@ -10,7 +10,6 @@ module.exports = {
                 username: req.body.username
             })
             .then(function (userData) {
-                console.log(userData,'---->>>userData');
                 if (!userData) {
                     let pass = String(Math.random() * 999999);
                     let salt = bcrypt.genSaltSync(saltRounds);
@@ -28,8 +27,8 @@ module.exports = {
                             res.status(200).json({
                                 message: 'Success login',
                                 token: token,
-                                username: req.body.username,
-                                email: userData.email
+                                username: response.username,
+                                email: response.email
                             })
                         })
                         .catch(function (err) {
