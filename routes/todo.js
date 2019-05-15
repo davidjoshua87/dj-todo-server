@@ -19,4 +19,7 @@ router.delete('/delete/:id', todo.deleteTodo)
 //finish todo
 router.put('/finish/:id', todo.finishedTodo)
 
+//unfinish todo
+router.put('/unfinish/:id', todo.unFinishedTodo)
+
 module.exports = router
