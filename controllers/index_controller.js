@@ -8,7 +8,7 @@ const saltRounds = 10;
 module.exports = {
     loginFB: function (req, res) {
         users.findOne({
-                username: req.body.email
+                email: req.body.email
             })
             .then(function (userData) {
 
