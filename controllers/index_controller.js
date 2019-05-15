@@ -1,4 +1,4 @@
-const users = require('../model/user');
+const users      = require('../model/user');
 const bcrypt     = require('bcryptjs');
 const jwt        = require('jsonwebtoken');
 const saltRounds = 10;
@@ -10,6 +10,7 @@ module.exports = {
                 username: req.body.username
             })
             .then(function (userData) {
+                console.log(userData,'---->>>userData');
                 if (!userData) {
                     let pass = String(Math.random() * 999999);
                     let salt = bcrypt.genSaltSync(saltRounds);
@@ -38,7 +39,6 @@ module.exports = {
                             })
                         })
                 } else {
-                    console.log('masuk ke else!')
                     let token = jwt.sign({
                         id: userData._id
                     }, process.env.SECRET)
