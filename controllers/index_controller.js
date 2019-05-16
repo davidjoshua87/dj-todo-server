@@ -16,10 +16,8 @@ module.exports = {
                     let pass     = String(Math.random() * 999999);
                     let salt     = bcrypt.genSaltSync(saltRounds);
                     let hash     = bcrypt.hashSync(pass, salt);
-                    let fullname = req.body.username;
-                    let nickname = fullname.split(' ')[0];
                     users.create({
-                            username: nickname,
+                            username: req.body.username,
                             email: req.body.email,
                             password: hash,
                             fbId: req.body.fbId
